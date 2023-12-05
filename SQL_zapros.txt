@@ -4,7 +4,7 @@
 
 scooter_rent=#
 SELECT cr.login,
-COUNT(od."inDelivery")
+COUNT(*) AS total_orders
 FROM "Couriers" AS cr
 INNER JOIN "Orders" AS od ON cr.id = od."courierId"
 WHERE od."inDelivery" = true
@@ -20,7 +20,7 @@ GROUP BY login;
 Для остальных случаев вывести 0.
 
 scooter_rent=#
-SELECT CAST(track AS varchar),
+SELECT track,
 CASE
  WHEN finished = true THEN '2'
  WHEN cancelled = true THEN '-1'
